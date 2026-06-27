@@ -100,6 +100,9 @@ class Trader:
         )
         await Runner.run(self.agent, message, max_turns=MAX_TURNS)
 
+    '''
+    nested async calls to this syntax
+    '''
     async def run_with_mcp_servers(self):
         async with AsyncExitStack() as stack:
             trader_mcp_servers = [

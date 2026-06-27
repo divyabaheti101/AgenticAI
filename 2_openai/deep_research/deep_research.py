@@ -1,3 +1,5 @@
+# the ui class, which gets displayed and runs first, which in turn runs the manager class
+
 import gradio as gr
 from dotenv import load_dotenv
 from research_manager import ResearchManager

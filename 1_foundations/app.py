@@ -1,3 +1,6 @@
+# init is contructor body
+# self is like this, but we need to pass self in all function calls
+
 from dotenv import load_dotenv
 from openai import OpenAI
 import json
@@ -77,7 +80,7 @@ class Me:
 
     def __init__(self):
         self.openai = OpenAI()
-        self.name = "Ed Donner"
+        self.name = "Divya Baheti"
         reader = PdfReader("me/linkedin.pdf")
         self.linkedin = ""
         for page in reader.pages:

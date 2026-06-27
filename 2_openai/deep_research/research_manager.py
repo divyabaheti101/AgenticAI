@@ -1,3 +1,7 @@
+# the workflow defined, and the whole logic, calls diff agents from here.
+# lab4 into a python structure for running on web.
+# we are yielding results, so that we can see them on ui, while they are executing, not needed to wait for the whole results.
+
 from agents import Runner, trace, gen_trace_id
 from search_agent import search_agent
 from planner_agent import planner_agent, WebSearchItem, WebSearchPlan
@@ -35,6 +39,11 @@ class ResearchManager:
         print(f"Will perform {len(result.final_output.searches)} searches")
         return result.final_output_as(WebSearchPlan)
 
+    
+    # we use as_completed, instead of gather, bcoz igather returns 
+    # only after everything or all tasks are fininshed.
+    # we need to yield the results, show what is going
+    # with as completed, we print, as soon as the task is completed.
     async def perform_searches(self, search_plan: WebSearchPlan) -> list[str]:
         """ Perform the searches to perform for the query """
         print("Searching...")

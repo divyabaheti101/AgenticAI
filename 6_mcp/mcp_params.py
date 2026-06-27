@@ -4,7 +4,7 @@ from market import is_paid_polygon, is_realtime_polygon
 
 load_dotenv(override=True)
 
-brave_env = {"BRAVE_API_KEY": os.getenv("BRAVE_API_KEY")}
+brave_env = {"TAVILY_API_KEY": os.getenv("TAVILY_API_KEY")}
 polygon_api_key = os.getenv("POLYGON_API_KEY")
 
 # The MCP server for the Trader to read Market Data
@@ -31,13 +31,12 @@ trader_mcp_server_params = [
 
 
 def researcher_mcp_server_params(name: str):
+    node_bin = os.path.expanduser("~/.nvm/versions/node/v22.22.3/bin")
+    if os.path.isdir(node_bin):
+        os.environ["PATH"] = node_bin + os.pathsep + os.environ["PATH"]
     return [
         {"command": "uvx", "args": ["mcp-server-fetch"]},
-        {
-            "command": "npx",
-            "args": ["-y", "@modelcontextprotocol/server-brave-search"],
-            "env": brave_env,
-        },
+        {"command": "npx", "args": ["-y", "tavily-mcp"], "env": brave_env},
         {
             "command": "npx",
             "args": ["-y", "mcp-memory-libsql"],
